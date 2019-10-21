@@ -1,0 +1,58 @@
+﻿@model madozdev_blog.Models.BlogPost
+
+@{
+    ViewBag.Title = "Delete";
+}
+    <div class="offset-md-3 col-md-6">
+        
+        <h3>Are you sure you want to delete this post?</h3>
+        <div>
+
+
+
+
+            <div class="ui items">
+                <div class="item">
+                    <div class="image" style="height:50%;width:50%;">
+                        <img src="/Uploads/@Html.DisplayFor(model => model.MediaURL)" >
+                    </div>
+                    <div class="content">
+                        <a class="header">@Html.DisplayFor(model => model.Title)</a>
+                        <div class="meta">
+                            <span>Description</span>
+                        </div>
+                        <div class="description">
+                            @Html.Raw(Model.Body)
+                        </div>
+                        <div class="extra">
+                            Created on @Html.DisplayFor(model => model.Created)
+                        </div>
+
+                        <div class="extra">
+                            Udated on @Html.DisplayFor(model => model.Updated)
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+
+
+                <hr />
+               
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="ui red button" />
+                @*@Html.ActionLink("Back To Blog", "Index", "Home", null, new { @class = "ui blue button" })*@
+                @Html.ActionLink("Back To Blog", "Details", "BlogPosts", new { Slug = Model.Slug }, new { @class = "ui orange button" })
+            </div>
+                }
+            </div>
+        </div>
+</div>

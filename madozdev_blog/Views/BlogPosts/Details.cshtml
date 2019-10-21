@@ -1,0 +1,140 @@
+﻿@model madozdev_blog.Models.BlogPost
+
+<div class="row">
+
+    <div class="offset-md-3 col-md-6">
+
+        <span class="h2 font-weight-bold ">@Model.Title</span>
+
+        <div class="ui card fluid">
+
+            <div class="image">
+                <img src="~/Uploads/@Model.MediaURL">
+            </div>
+            <div class="content">
+
+
+                <div class="meta">
+                    <span class="date">Posted on @Html.Raw(Model.Created.ToString("MMM dd,yyyy"))</span>
+                </div>
+                <div class="description">
+                    @Html.Raw(Model.Body)
+                </div>
+            </div>
+            <div class="extra content">
+                <a>
+                    <i class="user icon"></i>
+                    @Model.Comments.Count comments
+                </a>
+            </div>
+
+
+        </div>
+
+        <div class="card w-100 mb-5">
+
+            <div class="card-body">
+
+                @if (User.IsInRole("Admin"))
+                {
+
+                    @Html.ActionLink("Edit", "Edit", new { slug = Model.Slug }, new { @class = "ui orange button" })
+
+                    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "ui red button" })
+                    @Html.ActionLink("Back To Blogs", "Index", "Home",null, new { @class = "ui primary button" })
+
+                }
+
+            </div>
+        </div>
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div id="addComment">
+                @using (Html.BeginForm("Create", "Comments", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("BlogPostId", Model.Id)
+                    @Html.Hidden("Slug",Model.Slug)
+                    <div class="row mb-3">
+                        <div class=" col-md-12">
+                            @Html.TextArea("CommentBody", new { rows = 10, cols = 150, placeholder = "Add Comment" })
+                        </div>
+                    </div>
+
+
+                    <button type="submit" class="ui blue button"> <i class="icon edit"></i>Add Comment</button>
+                }
+            </div>
+        }
+
+        <hr style="border:2px solid red;" />
+
+
+        @foreach (var comment in Model.Comments.OrderByDescending(c => c.Created))
+        {
+
+    <div class="ui comments" style="background-color:white; padding:10px;border:1px solid #F8F8F8;border-radius:5px;box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.30);" >
+        <div class="comment">
+            <a class="avatar">
+                <img src="~/Images/user.png">
+            </a>
+            <div class="content">
+                <a class="author">@comment.Author.Email</a>
+                <div class="metadata">
+                    <div class="date">
+                        Replied on @comment.Created.ToString("MMM dd, yyyy")
+
+
+                    </div>
+
+                </div>
+                <div class="text col-md-5">
+                    @Html.Raw(comment.CommentBody)
+                </div>
+                
+
+                <div class="actions mb-2">
+                    @*<a class="reply">Reply</a>*@
+                    @if (comment.Updated.HasValue)
+                    {
+                        @Html.Raw("<span style=\"color: orange;\">Updated for " + comment.UpdateReason + "</span>");
+                    }
+
+                </div>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    if (User.IsInRole("Admin"))
+                    {
+
+                        @Html.ActionLink("Edit", "Edit", "Comments", new { id = comment.id }, new { @class = "ui orange button" })
+
+                        @Html.ActionLink("Delete", "Delete", "Comments", new { id = comment.id }, new { @class = "ui red button" })
+                    }
+                }
+
+            </div>
+            <hr />
+        </div>
+
+    </div>
+
+        }
+
+
+    </div>
+</div>
+
+@section Scripts {
+
+
+    <script src="~/Scripts/tinymce/tinymce.min.js"></script>
+    <script src="~/Scripts/tinymce/jquery.tinymce.min.j"></script>
+    <script type="text/javascript">
+        $(function() {
+            tinymce.init({selector:'textarea'});
+       });
+    </script>
+}
+
+

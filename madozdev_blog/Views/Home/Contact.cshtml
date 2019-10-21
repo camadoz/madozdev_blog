@@ -1,0 +1,67 @@
+﻿@model madozdev_blog.Models.EmailModel
+
+<div class="row">
+    <div class="offset-md-4 col-md-4" style="background-color:white; padding:10px;border:1px solid #F8F8F8;border-radius:5px;box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.30);">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            
+            
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <h3 class="col-md-10">Send me a message.</h3>
+                <hr />
+                @Html.LabelFor(model => model.FromName, new { @class = "col-md-2 control-label" })
+                <div class="col-md-12">
+                    @Html.TextBoxFor(m => m.FromName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.FromName)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.FromEmail, new { @class = "col-md-2 control-label" })
+                <div class="col-md-12">
+                    @Html.TextBoxFor(m => m.FromEmail, new { @class = "form-control", placeholder = "Enter your email here." })
+                    @Html.ValidationMessageFor(m => m.FromEmail)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Subject, new { @class = "col-md-2 control-label" })
+                <div class="col-md-12">
+                    @Html.TextBoxFor(m => m.Subject, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Subject)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Body, new { @class = "col-md-2 control-label" })
+                <div class="col-md-12">
+                    @Html.TextAreaFor(model => model.Body, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(m => m.Body)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="ui blue button" value="Send" />
+                    @Html.ActionLink("Back To Blogs", "Index", "Home", null, new { @class = "ui orange button" })
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
+
+@section Scripts {
+
+
+    <script src="~/Scripts/tinymce/tinymce.min.js"></script>
+    <script src="~/Scripts/tinymce/jquery.tinymce.min.j"></script>
+    <script type="text/javascript">
+        $(function() {
+            tinymce.init({selector:'textarea'});
+       });
+    </script>
+}

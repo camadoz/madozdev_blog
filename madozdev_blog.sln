@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29403.142
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "madozdev_blog", "madozdev_blog\madozdev_blog.csproj", "{54EC5CEF-A460-4D69-8CBA-C5C652BAB0BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "madozdev_portfolio", "..\..\..\Desktop\CODER FOUNDRY FILES\madozdev_portfolio\madozdev_portfolio\madozdev_portfolio.csproj", "{CF5A94D3-825A-4FA3-93FE-43D6D6EC8752}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{54EC5CEF-A460-4D69-8CBA-C5C652BAB0BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54EC5CEF-A460-4D69-8CBA-C5C652BAB0BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54EC5CEF-A460-4D69-8CBA-C5C652BAB0BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54EC5CEF-A460-4D69-8CBA-C5C652BAB0BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF5A94D3-825A-4FA3-93FE-43D6D6EC8752}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF5A94D3-825A-4FA3-93FE-43D6D6EC8752}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF5A94D3-825A-4FA3-93FE-43D6D6EC8752}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF5A94D3-825A-4FA3-93FE-43D6D6EC8752}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C87FBCA3-B9C8-4E9D-B91A-B2185CDE1738}
+	EndGlobalSection
+EndGlobal

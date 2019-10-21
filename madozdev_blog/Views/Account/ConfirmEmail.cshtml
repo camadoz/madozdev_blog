@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Please Confirm Your Email";
+}
+    <div class="row">
+        <div class="offset-md-4 col-md-4 mb-4 ">
+ 
+            <div class="ui success message">
+               
+                <div class="header">
+                    Thank you to register.
+                </div>
+                <p>You may now log-in with your email address.</p>
+            </div>
+
+        </div>
+     
+    </div>
+
+    <div class="row">
+        <div class="offset-md-5 col-md-2 ">
+
+            @Html.ActionLink("Click here to Log in", "Login", "Account", new { id = "loginLink" }, new { @class = "ui blue button" })
+        </div>
+    </div>

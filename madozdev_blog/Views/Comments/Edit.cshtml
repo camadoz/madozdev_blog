@@ -1,0 +1,67 @@
+﻿@model madozdev_blog.Models.Comment
+
+@{
+    ViewBag.Title = "Edit";
+}
+<div class="row">
+
+    <div class="offset-3 col-md-6" style="background-color:white; padding:10px;border:1px solid #F8F8F8;border-radius:5px;box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.30);">
+        <h2>Edit Comment</h2>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id)
+        @Html.HiddenFor(model => model.AuthorId)
+        @Html.HiddenFor(model => model.Created)
+        @Html.HiddenFor(model => model.BlogPostId)
+        @Html.HiddenFor(model => model.BlogPost.Slug)
+
+
+        <div class="form-group">
+
+            <div class="col-md-12">
+                @*@Html.EditorFor(model => model.CommentBody, new { htmlAttributes = new { @class = "form-control" } })*@
+
+                @Html.TextAreaFor(model => model.CommentBody, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CommentBody, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UpdateReason, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.UpdateReason, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UpdateReason, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-12">
+                <input type="submit" value="Save" class="ui blue button" />
+                @Html.ActionLink("Back To Blog", "Details", "BlogPosts", new { Slug = Model.BlogPost.Slug }, new { @class = "ui orange button" })
+            </div>
+        </div>
+    </div>
+        }
+    </div>
+</div>
+<div>
+   
+</div>
+@section Scripts {
+
+
+    <script src="~/Scripts/tinymce/tinymce.min.js"></script>
+    <script src="~/Scripts/tinymce/jquery.tinymce.min.j"></script>
+    <script type="text/javascript">
+        $(function() {
+            tinymce.init({selector:'textarea'});
+       });
+    </script>
+}

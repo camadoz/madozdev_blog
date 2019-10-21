@@ -1,0 +1,86 @@
+﻿@*@model IEnumerable<madozdev_blog.Models.BlogPost>*@
+@using PagedList;
+@using PagedList.Mvc;
+
+@using madozdev_blog.Models
+
+@model IPagedList<BlogPost>
+<div class="row">
+
+    <div class="offset-md-2 col-md-8">
+
+        @using (Html.BeginForm("Index", "BlogPosts", FormMethod.Get, htmlAttributes: new { @class = "form", id = "form2" }))
+        {
+
+        <div class="ui segment">
+            <div class="ui action input">
+                <input type="text" id="searchStr" name="searchStr" placeholder="Search...">
+                <button class="ui icon button">
+                    <i class="search icon"></i>
+                </button>
+            </div>
+        </div>
+        }
+        <table class="ui selectable celled table" >
+            <thead>
+                <tr>
+                    <th>Created</th>
+                    <th>Update</th>
+                    <th>Title</th>
+                    <th>Body</th>
+                    <th>Picture</th>
+                    <th >Published</th>
+                    <th style="width:20%;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Created)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Updated)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+
+                        <td>
+
+                            @Html.Raw(item.Body)
+                        </td>
+                        <td>
+
+                            <img src="~/Uploads/@Html.DisplayFor(modelItem => item.MediaURL)" style="width:65%;" />
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Published)
+                        </td>
+                        <td>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                @Html.ActionLink("Edit", "Edit", new { slug = item.Slug }, new { @class = "ui mini orange button desktop icon" })
+
+                                @Html.ActionLink("Details", "Details", new { slug = item.Slug }, new { @class = "ui mini blue button desktop icon" })
+
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "ui mini red button desktop icon" })
+
+                            }
+
+
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+        Page
+        @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </div>
+</div>

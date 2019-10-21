@@ -1,0 +1,75 @@
+﻿    <!-- Main Content -->
+@using PagedList;
+@using PagedList.Mvc;
+
+@using madozdev_blog.Models
+
+@*@model IEnumerable<BlogPost>*@
+
+@*@model IPagedList<BlogPost>*@
+@model IPagedList<BlogPost>
+    <div class="container mb-lg-5">
+        <div class="row">
+            <div class="offset-md-2 col-md-8" >
+
+
+
+
+                @foreach (var blogPost in Model)
+                {
+
+                    @Html.ActionLink(blogPost.Title, "Details", "BlogPosts", new { slug = blogPost.Slug }, new { @class = "post-title h3 font-weight-bold" })
+
+                    <div class="ui card fluid mb-5 wow fadeIn">
+                        <div class="image">
+                            <img src="~/Uploads/@blogPost.MediaURL">
+                        </div>
+                        <div class="content">
+                            @*<a class="header">@Html.ActionLink(@blogPost.Title, "Details", "BlogPosts", new { slug = blogPost.Slug }, new { @class = "post-title h3 font-weight-bold" })</a>*@
+                            <div class="meta">
+                                <span class="date">Posted on @Html.Raw(blogPost.Created.ToString("MMM dd,yyyy"))</span>
+                            </div>
+                            <div class="description">
+                                @Html.Raw(blogPost.Body)
+                            </div>
+                        </div>
+                        <div class="extra content">
+                            <a>
+                                @*<i class="user icon"></i>@blogPost.Comments.Count() Comments*@
+                            </a>
+                            <i class="user icon"></i> @Html.ActionLink(@blogPost.Comments.Count() + " Comments".ToString(), "Details", "BlogPosts", new { slug = blogPost.Slug }, true)
+
+                            <!--return Redirect($"{Url.Action("Details", "BlogPosts", new { Slug = slugCom })}#addComment");-->
+
+
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+            <div class="col-md-2">
+
+                <div class="ui placeholder">
+                    <div class="image header">sdfsd
+                        <div class="line">sdfsdf</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="paragraph">
+                        <div class="line">sdfsd</div>
+                        <div class="line">sdfsdf</div>
+                        <div class="line">sdfsd</div>
+                        <div class="line">sdfsd</div>
+                        <div class="line">sdfsd</div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </div>
+
