@@ -177,35 +177,124 @@
 
 
         $(document).ready(function() {
-            $("div").click(function () {
-
+            
                
                 $.ajax({
 
                     url: "https://newsapi.org/v2/everything?q=apple&from=2019-10-20&to=2019-10-20&sortBy=popularity&apiKey=93eeec3ea861403ab1b5ded7356e588b",
                     method: "Get",
+                    dataType: 'json', 
                     success: function(data){
-                        console.log(data.articles[3].author);
+                        //console.log(data.articles[0].source.name);
+                       // $("#newsTitle").html(data.articles[0].title);
+                       // $("#newsContent").html(data.articles[0].content);
+                        //$("#newsImage").attr("src", data.articles[0].urlToImage);
+
+ 
+
+                        var content = data.articles[0].content;
+
+                        console.log(data.articles.length);
+                        for (var i = 0; i < data.articles.length; i++) {
+                            createNews(data.articles[0].title, data.articles[i].title,
+                            data.articles[i].content, data.articles[i].urlToImage,
+                            data.articles[i].author, data.articles[i].publishedAt);
+
+                        }
+                       
+                       // create(content);
+                        
+
+
+
                     },
                     error: function () {
-                        alert("shite")
+                        console.log(data);
                     }
                 })
 
 
-          });
+
+
+            function create(contentNews) {
+                var mainContainer = document.getElementById('newsTest')
+                var container = document.createElement('div');
+                container.classList.add('container');
+                var intro = document.createElement('span');
+                intro.classList.add('intro');
+                var name = document.createElement('span');
+                name.id = 'name';
+                var introText = document.createTextNode(contentNews);
+              
+                var nameText = document.createTextNode('World!rtertertertertert');
+
+                name.appendChild(nameText);
+                intro.appendChild(introText);
+                container.appendChild(intro);
+                container.appendChild(name);
+
+                mainContainer.appendChild(container);
+            }
+
+            function createNews(title,description,contentNews,src,author,datePublished)
+            {
+                var contentNewsNode = document.createTextNode(contentNews);
+                var titleNode = document.createTextNode(title);
+                var description = document.createTextNode(description);
+                var author = document.createTextNode(author);
+                var datePublished = document.createTextNode(datePublished);
+
+
+                var newsContainer = document.getElementById('newsTest');
+
+                var container = document.createElement('div');
+                container.classList.add('card');
+
+                var imageNews = document.createElement('img');
+                imageNews.classList.add('card-img-top');
+                imageNews.src = src;
+
+                var innerContainer = document.createElement('div')
+                innerContainer.classList.add('card-body');
+
+                var cardTitle = document.createElement('h5');
+                cardTitle.classList.add('card-title');
+                cardTitle.appendChild(titleNode);
+
+                var paragraph = document.createElement('p');
+                paragraph.classList.add('card-text');
+                paragraph.appendChild(contentNewsNode);
+
+                var btn = document.createElement('a');
+                btn.classList.add('ui');
+                btn.classList.add('blue');
+                 btn.classList.add('button');
+                btn.href = "#";
+
+                innerContainer.appendChild(cardTitle);
+                innerContainer.appendChild(paragraph);
+                innerContainer.appendChild(btn);
+
+
+                container.appendChild(imageNews);
+                container.appendChild(innerContainer);
+
+
+                newsContainer.appendChild(container);
+
+            }
+
+
+
+
+          
         });
-
-
-
 
         $('input[type="file"]').change(function (e) {
             var fileName = e.target.files[0].name;
             $('.custom-file-label').html(fileName);
         });
-
-
-        
+       
 
     </script>
 

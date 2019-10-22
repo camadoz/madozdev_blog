@@ -90,7 +90,7 @@ namespace madozdev_blog.Controllers
                     var body = "<p>Email From: <bold>{0}</bold>({1})</p><p>Message:</p><p>{2}</p>";
 
                     var from = "madozc@gmail.com";
-                    model.Body = "THis is a message from you porfolio site. The name and the email of the contacting person is above.";
+                    model.Body = model.Body;
                     var email = new MailMessage(from, ConfigurationManager.AppSettings["emailto"])
                     {
                       Subject = "Portfolio Contact Email",

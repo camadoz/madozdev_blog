@@ -4,16 +4,10 @@
 
 @using madozdev_blog.Models
 
-@*@model IEnumerable<BlogPost>*@
-
-@*@model IPagedList<BlogPost>*@
 @model IPagedList<BlogPost>
     <div class="container mb-lg-5">
         <div class="row">
-            <div class="offset-md-2 col-md-8" >
-
-
-
+            <div class="offset-md-3 col-md-6" >
 
                 @foreach (var blogPost in Model)
                 {
@@ -25,7 +19,7 @@
                             <img src="~/Uploads/@blogPost.MediaURL">
                         </div>
                         <div class="content">
-                            @*<a class="header">@Html.ActionLink(@blogPost.Title, "Details", "BlogPosts", new { slug = blogPost.Slug }, new { @class = "post-title h3 font-weight-bold" })</a>*@
+                            
                             <div class="meta">
                                 <span class="date">Posted on @Html.Raw(blogPost.Created.ToString("MMM dd,yyyy"))</span>
                             </div>
@@ -34,13 +28,8 @@
                             </div>
                         </div>
                         <div class="extra content">
-                            <a>
-                                @*<i class="user icon"></i>@blogPost.Comments.Count() Comments*@
-                            </a>
+                  
                             <i class="user icon"></i> @Html.ActionLink(@blogPost.Comments.Count() + " Comments".ToString(), "Details", "BlogPosts", new { slug = blogPost.Slug }, true)
-
-                            <!--return Redirect($"{Url.Action("Details", "BlogPosts", new { Slug = slugCom })}#addComment");-->
-
 
                         </div>
                     </div>
@@ -48,24 +37,11 @@
 
 
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
 
-                <div class="ui placeholder">
-                    <div class="image header">sdfsd
-                        <div class="line">sdfsdf</div>
-                        <div class="line"></div>
-                    </div>
-                    <div class="paragraph">
-                        <div class="line">sdfsd</div>
-                        <div class="line">sdfsdf</div>
-                        <div class="line">sdfsd</div>
-                        <div class="line">sdfsd</div>
-                        <div class="line">sdfsd</div>
-                    </div>
-                </div>
+                <div id="newsTest"></div>
+
             </div>
-
-
 
         </div>
 
