@@ -185,27 +185,14 @@
                     method: "Get",
                     dataType: 'json', 
                     success: function(data){
-                        //console.log(data.articles[0].source.name);
-                       // $("#newsTitle").html(data.articles[0].title);
-                       // $("#newsContent").html(data.articles[0].content);
-                        //$("#newsImage").attr("src", data.articles[0].urlToImage);
-
- 
-
-                        var content = data.articles[0].content;
-
+  
                         console.log(data.articles.length);
                         for (var i = 0; i < data.articles.length; i++) {
                             createNews(data.articles[0].title, data.articles[i].title,
                             data.articles[i].content, data.articles[i].urlToImage,
-                            data.articles[i].author, data.articles[i].publishedAt);
+                            data.articles[i].author, data.articles[i].publishedAt,data.articles[i].url);
 
                         }
-                       
-                       // create(content);
-                        
-
-
 
                     },
                     error: function () {
@@ -236,14 +223,14 @@
                 mainContainer.appendChild(container);
             }
 
-            function createNews(title,description,contentNews,src,author,datePublished)
+            function createNews(title,description,contentNews,src,author,datePublished,url)
             {
                 var contentNewsNode = document.createTextNode(contentNews);
                 var titleNode = document.createTextNode(title);
                 var description = document.createTextNode(description);
                 var author = document.createTextNode(author);
                 var datePublished = document.createTextNode(datePublished);
-
+                var urlPage = document.createTextNode(url);
 
                 var newsContainer = document.getElementById('newsTest');
 
@@ -269,7 +256,8 @@
                 btn.classList.add('ui');
                 btn.classList.add('blue');
                  btn.classList.add('button');
-                btn.href = "#";
+                btn.href = url;
+                btn.innerText = "Visit Page";
 
                 innerContainer.appendChild(cardTitle);
                 innerContainer.appendChild(paragraph);
@@ -278,7 +266,7 @@
 
                 container.appendChild(imageNews);
                 container.appendChild(innerContainer);
-
+                container.appendChild(document.createElement('hr'));
 
                 newsContainer.appendChild(container);
 
